@@ -1,0 +1,10 @@
+{
+  "name": "catfood",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.12.3",
+    "sequelize": "^2.1.3",
+    "sequelize-cli": "^1.7.0",
+    "sqlite3": "^3.0.8"
+  }
+}
