@@ -18,7 +18,16 @@
     "gulp-flatten": "^0.0.4",
     "gulp-jekyll": "0.0.0",
     "gulp-less": "^2.0.1",
-    "gulp-react": "^3.0.1",
-    "main-bower-files": "^2.7.0"
+    "main-bower-files": "^2.7.0",
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.8",
+    "browserify-shim": "^3.8.5",
+    "vinyl-source-stream": "^1.0.0",
+    "classnames": "^1.2.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "axios": "^0.5.4",
+    "underscore": "^1.8.3",
+    "reqwest": "^2.0.4"
   }
 }

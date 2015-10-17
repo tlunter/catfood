@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 //app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/recipes', recipes);
+app.use('/api/recipes', recipes);
 
 app.use(function(req, res, next) {
   res.status(200).send(fs.readFileSync('public/index.html', { encoding: 'utf-8' }));

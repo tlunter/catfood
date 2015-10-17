@@ -1,3 +1,9 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import reqwest from 'reqwest';
+
+import RecipeList from 'recipe_list.jsx'
+
 var Home = React.createClass({
   getInitialState: function() {
     return {
@@ -12,19 +18,18 @@ var Home = React.createClass({
   },
   load: function() {
     reqwest({
-      url: '/recipes/',
+      url: '/api/recipes/',
       type: 'json',
       success: function(res) {
         this.setState({ recipes: res });
       }.bind(this)
     });
   },
-
   handleSubmit: function(event) {
     event.preventDefault();
 
     reqwest({
-      url: '/recipes/',
+      url: '/api/recipes/',
       method: 'post',
       type: 'json',
       data: JSON.stringify({
@@ -53,44 +58,18 @@ var Home = React.createClass({
   },
 
   render: function() {
-    var recipes = this.state.recipes.map(function(recipe) {
-      return (
-        <tr>
-          <td>{recipe.name}</td><td>{recipe.description}</td><td>{recipe.cookTime}</td>
-        </tr>
-      );
-    });
     return (
-      <form onSubmit={this.handleSubmit}>
-        <table>
-          <thead>
-            <tr>
-              <td>Name:</td>
-              <td>Description:</td>
-              <td>Cooktime:</td>
-            </tr>
-          </thead>
-          <tbody>
-            {recipes}
-          </tbody>
-          <tbody>
-            <tr>
-              <td>
-                <input type="text" value={this.state.name} onChange={this.handleOnChange('name')} />
-              </td>
-              <td>
-                <input type="text" value={this.state.description} onChange={this.handleOnChange('description')} />
-              </td>
-              <td>
-                <input type="text" value={this.state.cookTime} onChange={this.handleOnChange('cookTime')} />
-              </td>
-              <td>
-                <button onClick={this.handleSubmit}>Add!</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+      <div>
+        <RecipeList recipes={this.state.recipes} />
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.name} onChange={this.handleOnChange('name')} />
+          <input type="text" value={this.state.description} onChange={this.handleOnChange('description')} />
+          <input type="text" value={this.state.cookTime} onChange={this.handleOnChange('cookTime')} />
+          <button onClick={this.handleSubmit}>Add!</button>
+        </form>
+      </div>
     );
   }
 });
+
+ReactDOM.render(<Home />, document.querySelector('#content'));

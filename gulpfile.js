@@ -4,7 +4,9 @@ var concat = require('gulp-concat');
 var flatten = require('gulp-flatten');
 var bower = require('main-bower-files');
 var gulpFilter = require('gulp-filter');
-var react = require('gulp-react');
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var babelify = require('babelify');
 
 function swallowError(error) {
   console.log(error.toString());
@@ -27,11 +29,16 @@ gulp.task('less', function() {
 });
 
 gulp.task('js', function() {
-  gulp.src(paths.js)
-    .pipe(concat('app.js'))
-    .pipe(react())
+  return browserify({
+    entries: './assets/js/home.jsx',
+    paths: [ './node_modules', './assets/js' ],
+    transform: [babelify]
+  })
     .on('error', swallowError)
-    .pipe(gulp.dest('./public/js'));
+    .bundle()
+    .on('error', swallowError)
+    .pipe(source('./public/js/app.js'))
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('fonts', function() {
@@ -54,10 +61,6 @@ gulp.task('bower', function() {
     .pipe(flatten())
     .pipe(gulp.dest('./public/fonts'))
     .pipe(fontFilter.restore())
-    .pipe(jsFilter)
-    .pipe(concat('lib.js'))
-    .pipe(gulp.dest('./public/js'))
-    .pipe(jsFilter.restore())
     .pipe(cssFilter)
     .pipe(concat('lib.css'))
     .pipe(gulp.dest('./public/css'))
@@ -71,6 +74,6 @@ gulp.task('watch', function() {
   gulp.watch(paths.html, ['html']);
 });
 
-gulp.task('build', ['less', 'fonts', 'js', 'html', 'bower']);
+gulp.task('build', ['less', 'fonts', 'js', 'html']);
 
 gulp.task('default', ['build', 'watch']);
