@@ -30,7 +30,7 @@ gulp.task('less', function() {
 
 gulp.task('js', function() {
   return browserify({
-    entries: './assets/js/home.jsx',
+    entries: './assets/js/app.jsx',
     paths: [ './node_modules', './assets/js' ],
     transform: [babelify]
   })

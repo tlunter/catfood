@@ -7,7 +7,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.Recipe.hasMany(models.Step, {
+          as: 'steps'
+        });
+        models.Recipe.hasMany(models.Ingredient, {
+          as: 'ingredients'
+        });
       }
     }
   });
