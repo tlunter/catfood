@@ -1,6 +1,10 @@
 {
   "name": "catfood",
   "version": "0.0.1",
+  "scripts": {
+    "build:js": "NODE_PATH=node_modules:src browserify --extension=jsx src/app.js -o public/js/app.js",
+    "watch:js": "NODE_PATH=node_modules:src watchify src/app.js --extension=jsx -o public/js/app.js -dv"
+  },
   "dependencies": {
     "body-parser": "^1.12.3",
     "debug": "^2.2.0",
@@ -11,25 +15,21 @@
     "sqlite3": "^3.0.8"
   },
   "devDependencies": {
-    "gulp": "^3.8.10",
-    "gulp-concat": "^2.4.2",
-    "gulp-copy": "^0.0.2",
-    "gulp-filter": "^2.0.2",
-    "gulp-flatten": "^0.0.4",
-    "gulp-jekyll": "0.0.0",
-    "gulp-less": "^2.0.1",
-    "main-bower-files": "^2.7.0",
-    "babelify": "^5.0.4",
-    "browserify": "^9.0.8",
-    "browserify-shim": "^3.8.5",
-    "vinyl-source-stream": "^1.0.0",
-    "classnames": "^1.2.0",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
     "axios": "^0.5.4",
-    "underscore": "^1.8.3",
-    "reqwest": "^2.0.4",
+    "babelify": "^6.4.0",
+    "browserify": "^11.2.0",
+    "classnames": "^1.2.0",
+    "history": "^1.12.5",
+    "react": "^0.14.1",
+    "react-dom": "^0.14.1",
     "react-router": "1.0.0-rc3",
-    "history": "^1.12.5"
+    "reqwest": "^2.0.4",
+    "underscore": "^1.8.3",
+    "watchify": "^3.5.0"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
   }
 }
